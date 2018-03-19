@@ -1,8 +1,8 @@
-from Position import Position
+from Properties.Position import Position
 
 class Movement:
     def __init__(self):
-        self.speed = (10,0)
+        self.speed = 10
     
     def move(self):
         return self.speed

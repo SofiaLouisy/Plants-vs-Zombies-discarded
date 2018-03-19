@@ -1,6 +1,7 @@
-from Zombie import Zombie
-from Plant import Plant
-from Board import Board
+#from Actor.Zombie.Zombie import *
+#from Actor.Plant.Plant import *
+from Board.Board import Board
+import Actor
 import pygame
 import sys
 #pygame.examples.aliens
@@ -8,12 +9,11 @@ import sys
 #Initialize all internal modules
 pygame.init()
 
-
 size = width, height = Board.size
 
 #Inititing zombie
-zombie = Zombie()
-plant = Plant()
+zombie = Actor.Zombie()
+plant = Actor.Plant()
 
 #Setting background
 green = 100,255,100
@@ -26,10 +26,10 @@ screen = pygame.display.set_mode(size)
 zombie_img = pygame.image.load(zombie.grfx)
 plant_img = pygame.image.load(plant.grfx)
 
-print(plant.pos())
+print(plant.position())
 
 #Gives us a rect if we want
-#zombie_rect = zombie_img.get_rect(center = zombie.pos())#center = )
+#zombie_rect = zombie_img.get_rect(center = zombie.position())#center = )
 
 while True:
     #Check for user input
@@ -42,12 +42,17 @@ while True:
     #Move image and draw on screen
 
 
-    if(plant.isBlocking(zombie)):
-        screen.blit(zombie_img,zombie.pos())
+    if(zombie.isBlocked(plant)):
+        screen.blit(zombie_img,zombie.position())
+        zombie.attack(plant)
     else:
+
+
         screen.blit(zombie_img,zombie.move())
     
-    screen.blit(plant_img,plant.pos())
+    
+
+    screen.blit(plant_img,plant.position())
 
     #makes everything we just drew visible
     #this strategy makes sure we only see completed stuff
